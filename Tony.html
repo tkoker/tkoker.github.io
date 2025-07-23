@@ -1,0 +1,380 @@
+<html>
+<head>
+ <title>Tony</title>
+</head>
+<body text="#FFFFFF" link="#00FF00" vlink="#FF0000" alink="#FFFF00" background="images/corrugated_metal.gif">
+<script language="JavaScript1.2">
+<!-- hide from older browsers
+/* Loop through an indexed array of n elements with length property */
+function mklist(n)
+{
+   this.length=n;
+   for (var c=1 ; c <= n ; c++) {
+      this[c]=0;
+   }
+   return this;
+}
+
+/* Set a browser platform specific delay calibration for scrolling messages */
+function browserdelay()
+{
+   var retval=100;
+   if (navigator.userAgent.indexOf("Win") != 0) {      /* Windows based Netscape */
+      retval=150;
+   }
+   else if (navigator.userAgent.indexOf("Mac") != 0) { /* Mac based Netscape */
+      retval=500;
+   }
+   else if (navigator.userAgent.indexOf("X11") != 0) { /* XWindows based Netscape */
+      retval=750;
+   }
+   return retval;
+}
+
+/* Create the configuration object for scrollit */
+function mkcfg(n)
+{
+   this.num=1;                /* Which message we're on */
+   this.seed=0;               /* Used for scrolling types */
+   this.list=new mklist(n);   /* List of messages to display */
+   this.type=new mklist(n);   /* Display method indicators */
+   this.delay=browserdelay(); /* Browser platform specific delay */
+   this.timer=0;              /* System event timer */
+   this.showurl=(3 * 1000);   /* Timeout for urlfix functionality */
+   this.looping=true;         /* Continuously rotate messages? */
+   this.msgdisp=(5 * 1000);   /* How long to display non-scrolling messages */
+   this.barwidth=25;          /* How many character to size the status bar */
+   return this;
+}
+
+/* This function is used from within the page to display the url for a link */
+function urlfix(obj)
+{
+   window.clearTimeout(window.config.timer);
+   window.defaultStatus=obj.href;
+   window.config.timer=window.setTimeout("sbprint()",window.config.showurl);
+   return true;
+}
+
+/* This function handles the right to left scrolling */
+function scrollit_r2l()
+{
+   var out=" ";
+   var c=0;
+
+   if (window.config.seed <= window.config.barwidth && window.config.seed > 0) {
+      for (c=0 ; c < window.config.seed ; c++) {
+         out+=" ";
+      }
+   out+=window.config.list[window.config.num];
+   window.config.seed--;
+   window.status=out;
+   window.config.timer=window.setTimeout("scrollit_r2l()",window.config.delay);
+   }
+   else if (window.config.seed <= 0) {
+      if (-window.config.seed < window.config.list[window.config.num].length) {
+         out+=window.config.list[window.config.num].substring(-window.config.seed,window.config.list[window.config.num].length);
+         window.config.seed--;
+         window.status=out;
+         window.config.timer=window.setTimeout("scrollit_r2l()",window.config.delay);
+      }
+      else {
+         window.status=" ";
+         window.config.num++;
+         window.config.timer=window.setTimeout("sbprint()",window.config.msgdisp);
+      }
+   }
+}
+
+/* Call the following with the number of different messages you want to run */
+window.config=new mkcfg(5);
+window.config.list[1]="This is my personal home-page.  I hope you like it!?";
+window.config.type[1]=1;        /* Scroll right to left */
+
+window.config.list[2]="To view the others in my family, click on the links in the left frame.";
+window.config.type[2]=1;        /* Scroll right to left */
+
+window.config.list[3]="To view other sites (my interests), just click on the links, in the right frame.";
+window.config.type[3]=1;        /* Scroll right to left */
+
+window.config.list[4]="To send me e-mail, click on the e-mail link.";
+window.config.type[4]=1;        /* Scroll right to left */
+
+window.config.list[5]="Coming soon: Web-Rings, More java-script, and other java and programming experiments.";
+window.config.type[5]=1;        /* Scroll right to left */
+
+/* This function runs the status bar, cycling through your messages */
+function sbprint()
+{
+   if (window.config.num <= window.config.list.length) {
+      if (window.config.type[window.config.num] == 0) {
+         window.status=window.config.list[window.config.num];
+         window.config.num++;
+         window.clearTimeout(window.config.timer);
+         window.config.timer=window.setTimeout('sbprint()',window.config.msgdisp);
+      } else if (window.config.type[window.config.num] == 1) {
+         window.config.seed=window.config.barwidth;
+         scrollit_r2l();
+      }
+   } else if (window.config.looping) {
+      window.config.num=1;
+      window.clearTimeout(window.config.timer);
+      window.config.timer=window.setTimeout('sbprint()',window.config.delay);
+   }
+}
+sbprint();
+<!-- ending hiding -->
+</script>
+
+<center>
+<h2>
+Anton "Tony" Koker, Jr.</h2></center>
+
+<center><img SRC="images/tkoker.gif" ></center>
+<BR>
+<center><img SRC="images/madhack.gif" ></center>
+
+<ul>
+<li>
+Stoughton High School, Class of 1979</li>
+
+<li>
+<a href="http://www.northeastern.edu">Northeastern University</a>, Class of 1984, BSEE</li>
+
+<li>
+Occupation - <b>Computer Systems Engineer</b> (26 years - 24 in systems);
+Employers:</li>
+
+<ul>
+<li>
+<b><a href="http://www.raytheon.com/rsc/">E-Systems, Inc</a></b>, Garland, Texas</li>
+
+<li>
+<b>Self-employed consultant, LARK Enterprises</b>, Rowlett, Texas:</li>
+
+<ul>
+<li>
+<b><a href="http://www.ti.com">Texas Instruments</a></b>, Garland, Texas c/o DKW Systems, Inc, Dallas,
+Texas</li>
+
+<li>
+<b><a href="http://www.softwareag.com/corporat/">Software AG</a></b>, Dallas, Texas c/o DKW Systems, Inc, Dallas, Texas</li>
+
+<li>
+<b><a href="http://www.wcom.com/home.shtml">MCI Telecommunications</a></b>, Richardson, Texas c/o DKW Systems, Inc,
+Dallas, Texas</li>
+
+<li>
+<b><a href="http://www.wcom.com/home.shtml">MCI Telecommunications</a></b>, Richardson, Texas c/o XGS, Inc, Dallas,
+Texas</li>
+</ul>
+
+<li>
+<b>Self-employed consultant, LARK</b>, Rowlett, Texas:</li>
+
+<ul>
+<li>
+<b><a href="http://www.wcom.com/home.shtml">MCI Telecommunications</a></b>, Richardson, Texas</li>
+</ul>
+
+<li>
+<b>Self-employed consultant, LARK Ventures, Inc.</b>, Stoughton, Massachusetts:</li>
+
+<ul>
+<li>
+<b><a href="http://www.odi.com/">Object Design, Inc.</a></b>, Burlington, Massachusetts c/o Winter Wyman
+Contract Services, Waltham, Massachusetts</li>
+</ul>
+
+<li>
+<b><a href="http://www.lotus.com">Lotus Development Corp</a></b>, Cambridge, Massachusetts c/o TSG Professional
+Services, Stoneham, Massachusetts</li>
+
+<li>
+<b><a href="http://www.putnaminv.com">Putnam Investments</a></b>, Franklin, Massachusetts c/o TSG Professional
+Services, Stoneham, Massachusetts c/o Syscom, Inc., Baltimore, Maryland</li>
+
+<li>
+<b><a href="http://www.putnaminv.com">Putnam Investments</a></b>, Franklin, Massachusetts (employee, current)</li>
+</ul>
+
+<li>
+Activities - Raising two children, Masons, Promise Keepers, ZBT, Boy Scouts ... Forever
+learning... Model Railroading, Model Rockets, Photography (taking and developing), 
+Slot Cars, Robotics, Computers, Board Games, Card Games, and much, much more...</li>
+</ul>
+
+<center>
+<hr SIZE=8 WIDTH="90%">
+
+<h2>
+Some of my favorite links:</h2>
+
+<ul>
+
+<li>
+<a href="http://www.glmasons-mass.org/"><img SRC="images/SquareCompassesGlow.gif"><img SRC="images/OperativeWebMasonsGuild-gold.GIF"></a></li>
+
+<li>
+<a href="http://members.tripod.com/SquantoDist/index.html"><img SRC="images/squanto_dist.gif" height=100 width=100></a></li>
+
+<li>
+<a href="http://thegate.gamers.org/~tony/pgp.html"><img SRC="images/pgp-now.gif" height=31 width=88></a></li>
+
+<li>
+<a href="http://www.zetabetatau.org"><img src="images/ZBTcrest_highres_small.jpg" height=100 width=100 /></a></li>
+
+<li>
+<a href="http://www.ubuntu-ma.us"><img src="images/masslogo1.3.png" /></a></li>
+
+</ul>
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2007" src="images/ws07logo.jpg" height=100 width=200 /></a>
+</td></tr><tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2007</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2006" src="images/ws2006.jpg"></a>
+</td></tr><tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2006</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org">
+  <img border=0 alt="Supporting Warpstock 2005" src="images/wse2005logobanner.png">
+  <img border=0 alt="Supporting Warpstock 2005" src="images/warpstock_czech05.gif">
+  <img border=0 alt="Supporting Warpstock 2005" src="images/dd_logo.jpg">
+ </a>
+</td></tr><tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2005</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+<a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2004" src="images/ws2004_logo.gif"></a>
+</td></tr>
+<tr><td align=center>
+<font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2004</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+<a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2003 San Francisco" src="images/ws2003_logo.gif"></a>
+</td></tr>
+<tr><td align=center>
+<font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2003</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+<a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2002 Austin" src="images/wslogo02.gif"></a>
+</td></tr>
+<tr><td align=center>
+<font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2002</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2001 Toronto" src="images/ws2001_logo.gif"></a>
+</td></tr>
+<tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2001</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 2000" src="images/ws2k_logo.gif"></a>
+</td></tr>
+<tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 2000</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 1999 Toronto" src="images/ws99_logo.gif"></a>
+</td></tr>
+<tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 1999</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<!-- ------ Begin Warpstock Link ------------- -->
+<table border=0>
+<tr><td align=center>
+ <a href="http://www.warpstock.org"><img border=0 alt="Supporting Warpstock 1998" src="images/WarpStock98.gif"></a>
+</td></tr>
+<tr><td align=center>
+ <font size=-1><a href="http://www.warpstock.org">Supporting Warpstock 1998</a></font>
+</td></tr>
+</table>
+<!-- ------ End Warpstock Link --------------- -->
+<center>
+<hr SIZE=8 WIDTH="90%">
+35 Dean Road
+<br>Stoughton, MA 02072-3321
+<br>(781) 344-0729 (voice)
+<br>(781) 344-0863 (fax or BBS)
+<p><img SRC="images/Emailput.gif" BORDER=0 height=35 width=107>
+<br><a href="mailto:TonyKoker@bigfoot.com">TonyKoker@bigfoot.com</a> (e-mail)
+<!-- 
+<br>ShomerShabbatTroop54@bigfoot.com (e-mail)
+<br>HagoLark@bigfoot.com (e-mail)
+<br>hagolark@hotmail.com (e-mail)
+<br>tkoker@juno.com (e-mail)
+<br>tkoker@infoseek.com (e-mail)
+<br>74105.1432@compuserve.com (e-mail)
+<br>tony_koker@putnaminv.com (e-mail)
+-->
+<br><br><a href="http://www.bfib.net">Best Friends Information Business (BFIB)</a> (Our company web site)
+<br><img SRC="images/Emailput.gif" height=35 width=107>
+<br><a href="mailto:bfib@bigfoot.com">Best Friends Information Business (BFIB)</a> (e-mail)
+<br><br><a href="http://ourworld.compuserve.com/homepages/lark_ventures_inc/">LARK Ventures, Inc.</a> (Our company web site)
+<br><img SRC="images/Emailput.gif" height=35 width=107>
+<br><a href="mailto:lark_ventures_inc@compuserve.com">LARK Ventures, Inc.</a> (e-mail)
+
+<hr SIZE=4 NOSHADE WIDTH="80%">
+<a href="http://www.searchhound.com/cgi-bin/sh_index_page.cgi?sH5896">
+<img src="http://www.searchhound.com/images/shbanner3.gif" alt="Release the Hounds!" WIDTH="468" HEIGHT="60"></a>
+
+<hr SIZE=4 NOSHADE WIDTH="80%">
+<font size=-1>
+
+<center>
+<script language=JavaScript1.2>
+<!-- hide from older browsers
+lastmod = document.lastModified;    // get string of last modified date
+lastmoddate = Date.parse(lastmod);  // convert modified string to date
+if (lastmoddate == 0) {             // unknown date (or Jan 1, 1970 GMT)
+   document.writeln("Last Modified: Unknown");
+} else {
+   document.writeln("Last Modified: " + lastmod);
+}
+<!-- end hide -->
+</script>
+<BR>Copyright &copy; 1998-2025 LARK Ventures, Inc.  All Rights Reserved.
+</font>
+<br>
+<hr SIZE=8 WIDTH="90%"></center>
+</body>
+</html>
